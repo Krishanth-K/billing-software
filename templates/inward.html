@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<h2>Add New Inward</h2>
+<form method="POST">
+  <label>Company:</label><br />
+  <input type="text" name="company" required /><br /><br />
+
+  <label>DC No:</label><br />
+  <input type="text" name="dc_no" required /><br /><br />
+
+  <label>PO No:</label><br />
+  <input type="text" name="po_no" /><br /><br />
+
+  <label>Heat No:</label><br />
+  <input type="text" name="heat_no" /><br /><br />
+
+  <button type="submit">Add Inward</button>
+</form>
+{% endblock %}
