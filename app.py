@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-from core.company import get_all_companies
-from core.inward import get_all_inwards, insert_inward
+from core.company import get_all_company, get_all_company_names
+from core.inward import get_all_inwards, insert_inward, validate_inward
 
 app = Flask(__name__)
 
@@ -20,8 +20,11 @@ def inward():
         po_no = request.form.get("po_no")
         heat_no = request.form.get("heat_no")
 
-        insert_inward(company, dc_no, po_no, heat_no)
-        print(company, dc_no, po_no, heat_no)
+        if (validate_inward(company, dc_no, po_no, heat_no)):
+            insert_inward(company, dc_no, po_no, heat_no)
+        else:
+            print("Invalid details")
+
         return redirect(url_for("inward"))
 
     return render_template("inward.html")
@@ -30,7 +33,8 @@ def inward():
 # Testing
 @app.route("/test")
 def test():
-    print(get_all_companies())
+    # print(get_all_company_names())
+    # print(get_all_company())
     print(get_all_inwards())
 
     return render_template("index.html")
